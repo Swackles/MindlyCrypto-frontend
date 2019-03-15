@@ -1,0 +1,1 @@
+module.exports.urlAPI = "http://localhost:8080";

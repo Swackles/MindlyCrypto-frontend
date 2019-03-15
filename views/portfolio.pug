@@ -1,0 +1,52 @@
+extends layout
+
+block script
+  script(src="/javascripts/portfolio.js")
+
+block stylesheet
+  link(rel='stylesheet', href='/stylesheets/portfolio.css')
+
+block content
+  h1 Welcome to  your #{title}
+
+  h2 Add item to your portfolio:
+  form
+    p1 Currency:
+    select#addCurrencyID(name="currencySelect")
+      option(value="placeholder" selected style="display: none;") --Please choose currency--
+      each val in currencyData
+        option(value=`${val.id}`)= val.shortName
+    br
+    br
+    p1 Amount: 
+    input#addAmount(type="number" placeholder="How much did you buy?")
+
+    br
+    br
+    p1 Wallet location: 
+    br
+    textarea#addDescription(type="text" placeholder="Description for your portfolio item" rows="5" cols="30")
+
+    br
+    br
+    button(type="button" onclick="Add()") Submit
+
+  h2 Your portfolio:
+  table#portfolioTable
+    tr
+      th Cryptocurrency
+      th Amount
+      th Date of purchase
+      th Wallet location
+      th Curent market value (EUR)
+      th option
+    each val in portfolioData
+      tr
+        td(style="display: none;")= val.id
+        td= val.name
+        td= val.amount
+        td= val.purchased
+        td= val.description
+        td= val.marketValue
+        td
+          button(onclick="Delete("+val.id+")") Delete
